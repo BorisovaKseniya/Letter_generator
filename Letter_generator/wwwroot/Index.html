@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор писем</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe6f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #ffccdd;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: #d63384;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+        }
+
+        input, textarea, button {
+            width: 90%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #d63384;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #d63384;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            button:hover {
+                background-color: #a6266d;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Создать письмо</h2>
+        <form id="letterForm">
+            <input type="text" id="Name" placeholder="Имя" required>
+            <input type="text" id="Date" placeholder="Дата (например, 19.03.2025)" required>
+            <textarea id="Message" placeholder="Сообщение" required></textarea>
+            <button type="submit">Создать письмо</button>
+        </form>
+    </div>
+
+    <script>
+
+        document.getElementById("letterForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            let data = {
+                name: document.getElementById("Name").value,
+                date: document.getElementById("Date").value,
+                message: document.getElementById("Message").value
+            };
+        
+
+            let response = await fetch("http://localhost:5197/api/LetterData/generate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                let blob = await response.blob();
+                let link = document.createElement("a");
+                link.href = window.URL.createObjectURL(blob);
+                link.download = "letter.docx";
+                link.click();
+            } else {
+                alert("Ошибка генерации письма");
+            }
+        });
+    </script>
+</body>
+</html>
