@@ -1,14 +1,14 @@
-using System.Text.Json;
+using Letter_generator.wwwroot.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddControllers()
-.AddJsonOptions(options =>
- {
-     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
- });
+builder.Services.AddControllers();
+builder.Services.AddSingleton<Service>();
+
 var app = builder.Build();
+
 app.UseDefaultFiles();
 app.UseStaticFiles();
 // Configure the HTTP request pipeline.

@@ -10,22 +10,32 @@
     <div class="container">
         <h2>Создать письмо</h2>
         <form action="/generate" method="post">
-            <input type="text" name="CurrentLettNumb" placeholder="Номер письма" >
-            <input type="text" name="CurrentDate" placeholder="Дата письма" >
-            <input type="text" name="IncomingLettNumb" placeholder="Номер входящего письма" >
-            <input type="text" name="IncomingDate" placeholder="Дата входящего письма" >
-            <input type="text" name="Post" placeholder="Должность" >
-            <input type="text" name="Organization" placeholder="Организация" >
-            <input type="text" name="Recipient_FIO" placeholder="Фамилия Имя Отчество получателя" >
-            <input type="text" name="Theme" placeholder="Тема" >
-            <textarea name="Message" placeholder="Текст письма" ></textarea>
-            <input type="text" name="Performer_FIO" placeholder="Исполнитель" >
-            <input type="text" name="Performer_phone" placeholder="Номер" >
-            <input type="text" name="Performer_email" placeholder="E-mail" >
+            <input type="text" name="CurrentLettNumb" placeholder="Номер письма">
+            <input type="date" name="CurrentDate" placeholder="Дата письма">
+            <input type="text" name="IncomingLettNumb" placeholder="Номер входящего письма">
+            <input type="date" name="IncomingDate" placeholder="Дата входящего письма">
+            <input type="text" name="Post" placeholder="Должность">
+            <input type="text" name="Organization" placeholder="Организация">
+            <input type="text" name="Recipient_FIO" placeholder="Фамилия Имя Отчество получателя">
+
+            <p>Пол:</p>
+
+            <label for="male">Мужской:</label>
+            <input type="radio" id="male" name="Sex" value="male" required />
+
+            <label for="female">Женский:</label>
+            <input type="radio" id="female" name="Sex" value="female" required />
+
+            <input type="text" name="Theme" placeholder="Тема">
+            <textarea name="Text" placeholder="Текст письма"></textarea>
+            <input type="text" name="Performer_FIO" placeholder="Исполнитель">
+            <input type="text" name="Performer_phone" placeholder="Номер">
+            <input type="text" name="Performer_email" placeholder="E-mail">
+            <div id="applications-container"></div>
             <button type="submit">Создать письмо</button>
         </form>
     </div>
 
-    
+    <script src="Scripts/AddAttachment.js"></script>
 </body>
 </html>

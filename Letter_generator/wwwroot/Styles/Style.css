@@ -25,6 +25,10 @@ h2 {
     color: #d63384;
 }
 
+h3 {
+    color: #d63384;
+}
+
 form {
     display: flex;
     flex-direction: column;
