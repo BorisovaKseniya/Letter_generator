@@ -62,23 +62,26 @@ namespace Letter_generator.wwwroot.Services
                     };
 
 
-                    if (_letter.Attachments.Count == 0)
+                    if (_letter.Attachments.Count != 0)
                     {
                         placeholders["{Attachment}"] = "Приложения:";
                         int i = 1;
                         foreach (var attachment in _letter.Attachments)
                         {
-                            body.AppendChild(CreateParagraph($"{i++}. {attachment.Theme}"));
+                            if (attachment.Theme != null)
+                                body.AppendChild(CreateParagraph($"{i++}. {attachment.Theme}"));
                         }
                         i = 1;
                         foreach (var attachment in _letter.Attachments)
                         {
-
-                            body.AppendChild(new Paragraph(new Run(new Break() { Type = BreakValues.Page }))); // Разрыв страницы
-                            body.AppendChild(CreateRightAlignedParagraph($"Приложение {i}"));
-                            body.AppendChild(CreateCenterAlignedParagraph(attachment.Theme));
-                            body.AppendChild(CreateParagraph(attachment.Text));
-                            i++;
+                            if (attachment.Theme != null)
+                            {
+                                body.AppendChild(new Paragraph(new Run(new Break() { Type = BreakValues.Page }))); // Разрыв страницы
+                                body.AppendChild(CreateRightAlignedParagraph($"Приложение {i}"));
+                                body.AppendChild(CreateCenterAlignedParagraph(attachment.Theme));
+                                body.AppendChild(CreateParagraph(attachment.Text));
+                                i++;
+                            }
                         }
                     }
 
