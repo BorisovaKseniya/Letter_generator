@@ -4,117 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Генератор писем</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffe6f2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            background: #ffccdd;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 320px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        h2 {
-            text-align: center;
-            color: #d63384;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            align-items: center;
-        }
-
-        input, textarea, button {
-            width: 90%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #d63384;
-            border-radius: 5px;
-        }
-
-        button {
-            background-color: #d63384;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-            button:hover {
-                background-color: #a6266d;
-            }
-    </style>
+    <link rel="stylesheet" href="Styles/Style.css" />
 </head>
 <body>
     <div class="container">
         <h2>Создать письмо</h2>
-        <form id="letterForm">
-            <input type="text" id="CurrentLettNumb" placeholder="Номер письма" required>
-            <input type="text" id="CurrentDate" placeholder="Дата письма" required>
-            <input type="text" id="IncomingLettNumb" placeholder="Номер входящего письма" required>
-            <input type="text" id="IncomingDate" placeholder="Дата входящего письма" required>
-            <input type="text" id="Post" placeholder="Должность" required>
-            <input type="text" id="Organization" placeholder="Организация" required>
-            <input type="text" id="Sender_FIO" placeholder="Фамилия Имя Отчесвто отправителя" required>
-            <input type="text" id="Theme" placeholder="Тема" required>
-            <textarea id="Message" placeholder="Текст письма" required></textarea>
-            <input type="text" id="Performer_FIO" placeholder="Исполнитель" required>
-            <input type="text" id="Performer_phone" placeholder="Номер" required>
-            <input type="text" id="Performer_email" placeholder="E-mail" required>
+        <form action="/generate" method="post">
+            <input type="text" name="CurrentLettNumb" placeholder="Номер письма" >
+            <input type="text" name="CurrentDate" placeholder="Дата письма" >
+            <input type="text" name="IncomingLettNumb" placeholder="Номер входящего письма" >
+            <input type="text" name="IncomingDate" placeholder="Дата входящего письма" >
+            <input type="text" name="Post" placeholder="Должность" >
+            <input type="text" name="Organization" placeholder="Организация" >
+            <input type="text" name="Recipient_FIO" placeholder="Фамилия Имя Отчество получателя" >
+            <input type="text" name="Theme" placeholder="Тема" >
+            <textarea name="Message" placeholder="Текст письма" ></textarea>
+            <input type="text" name="Performer_FIO" placeholder="Исполнитель" >
+            <input type="text" name="Performer_phone" placeholder="Номер" >
+            <input type="text" name="Performer_email" placeholder="E-mail" >
             <button type="submit">Создать письмо</button>
         </form>
     </div>
 
-    <script>
-
-        document.getElementById("letterForm").addEventListener("submit", async function (event) {
-            event.preventDefault();
-
-            let data = {
-                CurrentLettNumb: document.getElementById("CurrentLettNumb").value,
-                CurrentDate: document.getElementById("CurrentDate").value,
-                IncomingLettNumb: document.getElementById("IncomingLettNumb").value,
-                IncomingDate: document.getElementById("IncomingDate").value,
-                Post: document.getElementById("Post").value,
-                Organization: document.getElementById("Organization").value,
-                Sender_FIO: document.getElementById("Sender_FIO").value,
-                Theme: document.getElementById("Theme").value,
-                Message: document.getElementById("Message").value,
-                Performer_FIO: document.getElementById("Performer_FIO").value,
-                Performer_phone: document.getElementById("Performer_phone").value,
-                Performer_email: document.getElementById("Performer_email").value,
-            };
-
-            let response = await fetch("http://localhost:5197/api/LetterData/generate", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            });
-
-            if (response.ok) {
-                let blob = await response.blob();
-                let link = document.createElement("a");
-                link.href = window.URL.createObjectURL(blob);
-                link.download = "letter.docx";
-                link.click();
-            } else {
-                alert("Ошибка генерации письма");
-            }
-        });
-    </script>
+    
 </body>
 </html>
