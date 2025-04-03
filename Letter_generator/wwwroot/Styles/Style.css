@@ -1,16 +1,21 @@
 ﻿
 body {
     font-family: Arial, sans-serif;
-    background-color: #ffe6f2;
+    background-color: #e7f1a8;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     margin: 0;
+    padding: 40px;
+    overflow: auto;
+}
+
+.application-block {
+    margin-bottom: 20px; /* Чтобы блоки не сливались */
 }
 
 .container {
-    background: #ffccdd;
+    background: #95b1ee;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -22,15 +27,14 @@ body {
 
 h2 {
     text-align: center;
-    color: #d63384;
+    color: #364c84;
 }
 
 h3 {
-    color: #d63384;
+    color: #95b1ee;
 }
 
 form {
-    display: flex;
     flex-direction: column;
     width: 100%;
     align-items: center;
@@ -45,14 +49,14 @@ input, textarea, button {
 }
 
 button {
-    background-color: #d63384;
+    background-color: #364c84;
     color: white;
     border: none;
     cursor: pointer;
     font-size: 16px;
 }
 
-    button:hover {
-        background-color: #a6266d;
-    }
+button:hover {
+    background-color: #364c84;
+}
 
