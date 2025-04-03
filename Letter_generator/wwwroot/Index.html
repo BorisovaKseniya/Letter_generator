@@ -63,9 +63,18 @@
     <div class="container">
         <h2>Создать письмо</h2>
         <form id="letterForm">
-            <input type="text" id="Name" placeholder="Имя" required>
-            <input type="text" id="Date" placeholder="Дата (например, 19.03.2025)" required>
-            <textarea id="Message" placeholder="Сообщение" required></textarea>
+            <input type="text" id="CurrentLettNumb" placeholder="Номер письма" required>
+            <input type="text" id="CurrentDate" placeholder="Дата письма" required>
+            <input type="text" id="IncomingLettNumb" placeholder="Номер входящего письма" required>
+            <input type="text" id="IncomingDate" placeholder="Дата входящего письма" required>
+            <input type="text" id="Post" placeholder="Должность" required>
+            <input type="text" id="Organization" placeholder="Организация" required>
+            <input type="text" id="Sender_FIO" placeholder="Фамилия Имя Отчесвто отправителя" required>
+            <input type="text" id="Theme" placeholder="Тема" required>
+            <textarea id="Message" placeholder="Текст письма" required></textarea>
+            <input type="text" id="Performer_FIO" placeholder="Исполнитель" required>
+            <input type="text" id="Performer_phone" placeholder="Номер" required>
+            <input type="text" id="Performer_email" placeholder="E-mail" required>
             <button type="submit">Создать письмо</button>
         </form>
     </div>
@@ -76,11 +85,19 @@
             event.preventDefault();
 
             let data = {
-                name: document.getElementById("Name").value,
-                date: document.getElementById("Date").value,
-                message: document.getElementById("Message").value
+                CurrentLettNumb: document.getElementById("CurrentLettNumb").value,
+                CurrentDate: document.getElementById("CurrentDate").value,
+                IncomingLettNumb: document.getElementById("IncomingLettNumb").value,
+                IncomingDate: document.getElementById("IncomingDate").value,
+                Post: document.getElementById("Post").value,
+                Organization: document.getElementById("Organization").value,
+                Sender_FIO: document.getElementById("Sender_FIO").value,
+                Theme: document.getElementById("Theme").value,
+                Message: document.getElementById("Message").value,
+                Performer_FIO: document.getElementById("Performer_FIO").value,
+                Performer_phone: document.getElementById("Performer_phone").value,
+                Performer_email: document.getElementById("Performer_email").value,
             };
-        
 
             let response = await fetch("http://localhost:5197/api/LetterData/generate", {
                 method: "POST",
